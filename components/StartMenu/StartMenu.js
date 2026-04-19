@@ -1,7 +1,8 @@
 "use client"
+import { title } from "process";
 import styles from "./StartMenu.module.css"
 import { useState, useRef } from "react"
-export default function StartMenu({ handleLogoff, handleShutdown, openLink }) {
+export default function StartMenu({ handleLogoff, handleShutdown, openLink, openApp }) {
 
     const [open, setOpen] = useState(false);
     const timeoutRef = useRef(null);
@@ -42,9 +43,16 @@ export default function StartMenu({ handleLogoff, handleShutdown, openLink }) {
                         <li><img src="/music.webp" alt="projrcts"></img>
                             <div className={styles.icon_content}>
                                 <span className={styles.heading2}>Music Player</span></div></li>
-                        <li><img src="/paint.webp" alt="projrcts"></img>
+
+                        <li onClick={()=>{openApp({
+                            type: "paint",
+                            title: "Paint",
+                            icon: "/paint.webp"
+                        })}}><img src="/paint.webp" alt="projrcts"></img>
                             <div className={styles.icon_content}>
                                 <span className={styles.heading2}>Paint</span></div></li>
+
+
                         <li className={styles.divider} ><img src="/doodledev.webp" alt="projrcts"></img>
                             <div className={styles.icon_content}>
                                 <span className={styles.heading2}>DoodleDev</span></div></li>

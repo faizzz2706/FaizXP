@@ -1,0 +1,110 @@
+.window {
+  position: absolute;
+  background: white;
+  border: 2px solid black;
+}
+
+.header {
+  height: 30px;
+  background: #0064FF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: move;
+  padding: 0 6px;
+}
+
+.title_box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.title_box img {
+  width: 16px;
+}
+
+.control_buttons button {
+  width: 25px;
+  height: 20px;
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+.content {
+  height: calc(100% - 30px);
+}
+
+/* SIDES */
+.resizer_right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.resizer_left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.resizer_bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  cursor: ns-resize;
+}
+
+.resizer_top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  cursor: ns-resize;
+}
+
+/* CORNERS */
+.resizer_br {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nwse-resize;
+}
+
+.resizer_bl {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nesw-resize;
+}
+
+.resizer_tr {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nesw-resize;
+}
+
+.resizer_tl {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nwse-resize;
+}
