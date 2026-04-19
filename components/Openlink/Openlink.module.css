@@ -1,0 +1,98 @@
+.open_container{
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    z-index: 5;
+    background-color: #0050F5;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    padding: 0px 2px 2px 2px;
+}
+
+.nevbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-size: 13px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 5px 2px 2px 2px;
+    font-weight: 700;
+    text-shadow: 1px 1px #0f1089;
+}
+
+.nevbar img{
+    width: 21px;
+    height: 21px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.main_content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F0EDDB;
+}
+.popup_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Tahoma;
+    font-weight: 700;
+    font-size: 14px;
+    gap: 6px;
+    padding-bottom: 6px;
+}
+.popup_content img{
+    width: 40px;
+    height: 40px;
+}
+
+.popup_text{
+    font-family: Tahoma;
+    font-size: 13px;
+    font-weight: 100;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.popup_buttons{
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.popup_buttons button{
+    padding: 0px 15px 0px 15px;
+    height: 23px;
+    font-family: "Pixelated MS Sans Serif", Arial;
+    -webkit-font-smoothing: antialiased;
+    font-size: 11px;
+    box-sizing: border-box;
+    border: 1px solid #003c74;
+    background: linear-gradient(180deg, #fff, #ecebe5 86%, #d8d0c4);
+    box-shadow: none;
+    border-radius: 3px;
+}
+
+.popup_buttons button:not(:disabled):hover
+ {
+    box-shadow: inset -1px 1px #fff0cf, inset 1px 2px #fdd889, inset -2px 2px #fbc761, inset 2px -2px #e5a01a;
+}
+
+.popup_buttons button:focus {
+    box-shadow: inset -1px 1px #cee7ff, inset 1px 2px #98b8ea, inset -2px 2px #bcd4f6, inset 1px -1px #89ade4, inset 2px -2px #89ade4;
+}

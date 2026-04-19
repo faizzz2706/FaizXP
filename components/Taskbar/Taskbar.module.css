@@ -1,0 +1,92 @@
+.taskbar {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(to top, #245edb, #3a6ff2);
+  overflow: visible;
+}
+
+.taskbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0)
+  );
+
+  pointer-events: none;
+}
+.start_button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.start_button img {
+  height: 31px;
+  display: block;
+}
+
+.start_button:hover img {
+  filter: brightness(1.15) contrast(1.1);
+}
+
+.start_button:active img {
+  filter: brightness(0.9);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.middle {
+  flex: 1;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 110px;
+  padding: 0 10px;
+  height: 100%;
+
+  background-color: #6293ff;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tray_content {
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  align-items: center;
+  gap: 5px;
+}
+
+.tray_content button {
+  all: unset;
+  cursor: pointer;
+}
+
+.time {
+  white-space: nowrap;
+  text-align: center;
+  font-family: "Tahoma", sans-serif;
+  font-size: 11px;
+  color: white;
+}
