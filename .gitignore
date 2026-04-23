@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+# Vs Code settings
+/.vscode
 
 # next.js
 /.next/

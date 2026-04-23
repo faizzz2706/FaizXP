@@ -60,7 +60,7 @@ export default function CmdApp({ onClose }) {
       {history &&
         history.map((item, i) => (
           <div key={i}>
-            <div>C:\&gt; {item.cmd}</div>
+            <div>C:\faiz\&gt; {item.cmd}</div>
             <div>{item.output}</div>
           </div>
         ))}
