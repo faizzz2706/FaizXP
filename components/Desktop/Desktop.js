@@ -21,6 +21,10 @@ export default function Desktop() {
   const [openLinkData, setLinkData] = useState(null)
   const [windows, setWindows] = useState([])
 
+  const [isSelecting, setIsSelecting] = useState(false)
+  const [start, setStart] = useState({ x: 0, y: 0 })
+  const [end, setEnd] = useState({ x: 0, y: 0 })
+
   /*----------------------------FUNCTIONS----------------------------------*/
 
   const openWindow = (data) => {
@@ -145,10 +149,31 @@ export default function Desktop() {
 
   const isDimmed = isLogoff || isShutdown
 
+  // Function to select box
+
+  const handleMouseDown = (e) => {
+    setIsSelecting(true)
+    setStart({ x: e.clientX, y: e.clientY })
+    setEnd({ x: e.clientX, y: e.clientY })
+  }
+
+  const handleMouseMove = (e) => {
+    if (!isSelecting) return
+    setEnd({ x: e.clientX, y: e.clientY })
+  }
+
+  const handleMouseUp = (e) => {
+    setIsSelecting(false)
+  }
   /*----------------------------RENDER----------------------------------*/
   return (
     /*----------------------------DESKTOP MAIN RENDER----------------------------------*/
-    <div className={styles.main_container}>
+    <div
+      className={styles.main_container}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+    >
       <div
         className={`${styles.background} ${isDimmed ? styles.grayscale : ''}`}
       />
@@ -199,6 +224,21 @@ export default function Desktop() {
             {win.type === 'paint' && <PaintApp />}
           </Windows>
         ))}
+
+        {/*---------------------------------SELECT WINDOW------------------------------*/}
+
+        {isSelecting && (
+          <div
+            className={styles.select_box}
+            style
+            ={{
+              left: Math.min(start.x, end.x),
+              top: Math.min(start.y, end.y),
+              width: Math.abs(end.x - start.x),
+              height: Math.abs(end.y - start.y),
+            }}
+          ></div>
+        )}
 
         {/*----------------------------WELCOME PUPUP----------------------------------*/}
 
