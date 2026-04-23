@@ -78,8 +78,12 @@ export default function CmdApp({ onClose }) {
             color: 'white',
             border: 'none',
             outline: 'none',
-            fontSize: '17px',
+            fontFamily: 'monospace',
+            fontSize: '16px',
             fontWeight: '600',
+            boxSizing: 'border-box',
+            paddingLeft: '9px',
+            lineHeight: '1.3'
           }}
         />
       </div>
