@@ -36,19 +36,49 @@
 
 .icon_wrapper {
     box-sizing: border-box;
-    height: 100vh;
+    height: auto;
     width: 10vw;
     padding-top: 30px;
     padding-bottom: 70px;
     display: grid;
     justify-content: center;
+    gap: 8px;
+
 }
 
-.icon_text {
-    margin-top: 10px;
-    width: 100px;
-    height: 100px;
-    background-color: red;
+.icon_div {
+    box-sizing: border-box;
+    margin-left: 10px;
+    width: 110px;
+    height: 110px;
+    padding: 8px;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.icon_div:hover{
+    background-color:rgba(49, 106, 197, 0.35);
+    border-radius: 5px;
+}
+
+.icon_div img{
+    width: 60px;
+    height: 60px;
+}
+
+.icon_div p{  
+    color: #fff;
+    display: block;
+    font-size: var(--desktop-icon-font-size);
+    font-weight: 400;
+    letter-spacing: .3px;
+    line-height: var(--desktop-icon-line-height);
+    max-width: 100%;
+    overflow: visible;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .8);
+    transform: translateY(2px);
+    white-space: normal;
 }
 
 .crt {

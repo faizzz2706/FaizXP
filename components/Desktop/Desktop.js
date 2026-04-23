@@ -95,14 +95,12 @@ export default function Desktop() {
   }
 
   const toggleMinimize = (id) => {
-  setWindows(prev =>
-    prev.map(win =>
-      win.id === id
-        ? { ...win, isMinimized: !win.isMinimized }
-        : win
+    setWindows((prev) =>
+      prev.map((win) =>
+        win.id === id ? { ...win, isMinimized: !win.isMinimized } : win
+      )
     )
-  );
-};
+  }
 
   const closeWindow = (id) => {
     setWindows((prev) => prev.filter((win) => win.id != id))
@@ -159,10 +157,22 @@ export default function Desktop() {
         className={`${styles.desktop_content} ${isDimmed ? styles.grayscale : ''}`}
       >
         <div className={styles.icon_wrapper}>
-          <div className={styles.icon_text}></div>
-          <div className={styles.icon_text}></div>
-          <div className={styles.icon_text}></div>
-          <div className={styles.icon_text}></div>
+          <div className={styles.icon_div}>
+            <img src="/about.webp" alt="About"></img>
+            <p>About Me</p>
+          </div>
+          <div className={styles.icon_div}>
+            <img src="/resume.webp" alt="My Resume"></img>
+            <p>My Resume</p>
+          </div>
+          <div className={styles.icon_div}>
+            <img src="/projects.webp" alt="My projects"></img>
+            <p>My Projects</p>
+          </div>
+          <div className={styles.icon_div}>
+            <img src="/contact.webp" alt="About"></img>
+            <p>Contact Me</p>
+          </div>
         </div>
 
         {crt && <div className={styles.crt}></div>}

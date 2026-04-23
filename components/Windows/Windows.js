@@ -144,9 +144,9 @@ export default function Windows({
         </div>
 
         <div className={styles.control_buttons}>
-          <button onClick={onMinimize}>_</button>
-          <button onClick={onMaximize}>□</button>
-          <button onClick={onClose}>X</button>
+          <button onClick={onMinimize} className={styles.minimize}></button>
+          <button onClick={onMaximize} className={styles.maximize}></button>
+          <button onClick={onClose} className={styles.close}></button>
         </div>
       </div>
 
