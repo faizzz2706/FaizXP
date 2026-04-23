@@ -15,6 +15,7 @@ export default function Windows({
   onFocus,
   onMinimize,
   onMaximize,
+  disableMaximize,
   onUpdate,
   children
 }) {
@@ -145,7 +146,7 @@ export default function Windows({
 
         <div className={styles.control_buttons}>
           <button onClick={onMinimize} className={styles.minimize}></button>
-          <button onClick={onMaximize} className={styles.maximize}></button>
+          <button onClick={onMaximize} disabled = {disableMaximize} className={styles.maximize}></button>
           <button onClick={onClose} className={styles.close}></button>
         </div>
       </div>

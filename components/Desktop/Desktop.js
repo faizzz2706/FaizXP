@@ -9,15 +9,17 @@ import { useState } from 'react'
 import { useOS } from '@/context/OSContext'
 import Windows from '../Windows/Windows'
 import PaintApp from '../PaintApp/PaintApp'
+import CmdApp from '../CmdApp/CmdApp'
+
 export default function Desktop() {
-  /*-------------------------STATES--------------------------------------*/
+  /*----------------------------------STATES--------------------------------------*/
 
   const [crt, useCrt] = useState(false)
   const [welcome, showWelcome] = useState(false)
   const [startMenu, setStartMenu] = useState(false)
   const [isLogoff, setLogoff] = useState(false)
   const [isShutdown, setShutdown] = useState(false)
-  const { restart, logoff } = useOS()
+  const {restart, logoff } = useOS()
   const [openLinkData, setLinkData] = useState(null)
   const [windows, setWindows] = useState([])
 
@@ -36,6 +38,10 @@ export default function Desktop() {
       size = { width: 790, height: 600 }
     }
 
+    if (data.type === 'cmd') {
+      size = { width: 620, height: 420 }
+    }
+
     const newWindow = {
       id: Date.now(),
       type: data.type,
@@ -48,6 +54,7 @@ export default function Desktop() {
       isMinimized: false,
       isMaximized: false,
       zIndex: windows.length + 1,
+      disableMaximize: data.type === 'cmd',
     }
 
     setWindows((prev) => [...prev, newWindow])
@@ -220,18 +227,21 @@ export default function Desktop() {
             onMinimize={() => toggleMinimize(win.id)}
             onMaximize={() => toggleMaximize(win.id)}
             onUpdate={(updates) => updateWindow(win.id, updates)}
+            disableMaximize={win.disableMaximize}
           >
             {win.type === 'paint' && <PaintApp />}
+            {win.type === 'cmd' && (
+              <CmdApp onClose={() => closeWindow(win.id)} />
+            )}
           </Windows>
         ))}
 
-        {/*---------------------------------SELECT WINDOW------------------------------*/}
+        {/*---------------------------------SELECT WINDOW--------------------------------*/}
 
         {isSelecting && (
           <div
             className={styles.select_box}
-            style
-            ={{
+            style={{
               left: Math.min(start.x, end.x),
               top: Math.min(start.y, end.y),
               width: Math.abs(end.x - start.x),
@@ -240,7 +250,7 @@ export default function Desktop() {
           ></div>
         )}
 
-        {/*----------------------------WELCOME PUPUP----------------------------------*/}
+        {/*---------------------------------WELCOME PUPUP----------------------------------*/}
 
         {welcome && (
           <div className={styles.welcome_popup}>
@@ -267,10 +277,11 @@ export default function Desktop() {
             handleShutdown={handleShutdown}
             openLink={handleLinkData}
             openApp={openWindow}
+            closeStart = {()=>setStartMenu(false)}
           />
         )}
 
-        {/*----------------------------TASKBAR----------------------------------*/}
+        {/*---------------------------------TASKBAR-----------------------------------*/}
 
         <Taskbar
           windows={windows}
