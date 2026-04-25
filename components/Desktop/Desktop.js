@@ -9,7 +9,10 @@ import { useState } from 'react'
 import { useOS } from '@/context/OSContext'
 import Windows from '../Windows/Windows'
 import PaintApp from '../PaintApp/PaintApp'
+import Contact from '../Contact/Contact'
 import CmdApp from '../CmdApp/CmdApp'
+import { type } from 'os'
+import { title } from 'process'
 
 export default function Desktop() {
   /*----------------------------------STATES--------------------------------------*/
@@ -19,7 +22,7 @@ export default function Desktop() {
   const [startMenu, setStartMenu] = useState(false)
   const [isLogoff, setLogoff] = useState(false)
   const [isShutdown, setShutdown] = useState(false)
-  const {restart, logoff } = useOS()
+  const { restart, logoff } = useOS()
   const [openLinkData, setLinkData] = useState(null)
   const [windows, setWindows] = useState([])
 
@@ -40,6 +43,10 @@ export default function Desktop() {
 
     if (data.type === 'cmd') {
       size = { width: 620, height: 420 }
+    }
+
+    if (data.type === 'contact-me') {
+      size = { width: 512, height: 360 }
     }
 
     const newWindow = {
@@ -201,7 +208,16 @@ export default function Desktop() {
             <img src="/projects.webp" alt="My projects"></img>
             <p>My Projects</p>
           </div>
-          <div className={styles.icon_div}>
+          <div
+            className={styles.icon_div}
+            onDoubleClick={() =>
+              openWindow({
+                type: 'contact-me',
+                title: 'Contact Me',
+                icon: '/contact.webp',
+              })
+            }
+          >
             <img src="/contact.webp" alt="About"></img>
             <p>Contact Me</p>
           </div>
@@ -232,6 +248,13 @@ export default function Desktop() {
             {win.type === 'paint' && <PaintApp />}
             {win.type === 'cmd' && (
               <CmdApp onClose={() => closeWindow(win.id)} />
+            )}
+            {win.type === 'contact-me' && (
+              <Contact
+                onClose={() => closeWindow(win.id)}
+                onMinimize={() => toggleMinimize(win.id)}
+                onMaximize={() => toggleMaximize(win.id)}
+              />
             )}
           </Windows>
         ))}
@@ -277,7 +300,7 @@ export default function Desktop() {
             handleShutdown={handleShutdown}
             openLink={handleLinkData}
             openApp={openWindow}
-            closeStart = {()=>setStartMenu(false)}
+            closeStart={() => setStartMenu(false)}
           />
         )}
 

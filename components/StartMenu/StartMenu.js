@@ -39,7 +39,17 @@ export default function StartMenu({
             </li>
             <li className={styles.divider}>
               <img src="/contact.webp" alt="projrcts"></img>
-              <div className={styles.icon_content}>
+              <div
+                className={styles.icon_content}
+                onClick={() => {
+                  closeStart()
+                  openApp({
+                    type: 'contact-me',
+                    title: 'Contact Me',
+                    icon: '/contact.webp',
+                  })
+                }}
+              >
                 <span className={styles.heading}>Contact Me</span>
                 <span className={styles.subheading}>Send me a message</span>
               </div>
@@ -122,7 +132,17 @@ export default function StartMenu({
                   <img src="/resume.webp"></img>
                   <span>My Resume</span>
                 </div>
-                <div className={styles.program_li}>
+                <div
+                  className={styles.program_li}
+                  onClick={() => {
+                    closeStart()
+                    openApp({
+                      type: 'contact-me',
+                      title: 'Contact Me',
+                      icon: '/contact.webp',
+                    })
+                  }}
+                >
                   <img src="/contact.webp"></img>
                   <span>Contact Me</span>
                 </div>

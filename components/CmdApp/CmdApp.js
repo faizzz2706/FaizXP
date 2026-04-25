@@ -36,7 +36,7 @@ export default function CmdApp({ onClose }) {
     } else if (cmd.trim().toLowerCase() === 'ver') {
       output = 'FaizXP v1.0 (March 2026)'
     } else if (cmd.trim().toLowerCase() === 'exit') {
-      onClose()
+      onClose();
       return;
     } else if (cmd.trim().toLowerCase() === 'clear') {
       setHistory([])
