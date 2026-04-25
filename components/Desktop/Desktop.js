@@ -254,6 +254,7 @@ export default function Desktop() {
                 onClose={() => closeWindow(win.id)}
                 onMinimize={() => toggleMinimize(win.id)}
                 onMaximize={() => toggleMaximize(win.id)}
+                openLink = {handleLinkData}
               />
             )}
           </Windows>

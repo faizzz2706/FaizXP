@@ -1,7 +1,7 @@
 import styles from './Contact.module.css'
 import { useState } from 'react'
 
-export default function Contact({onClose, onMinimize, onMaximize}) {
+export default function Contact({onClose, onMinimize, onMaximize, openLink}) {
   const [activeMenu, setActiveMenu] = useState(null)
 
   function toggleMenu(menuName) {
@@ -140,7 +140,13 @@ export default function Contact({onClose, onMinimize, onMaximize}) {
           <img src="/paste.webp" />
         </div>
 
-        <div className={`${styles.toolbarItem} ${styles.linkedin}`}>
+        <div className={`${styles.toolbarItem} ${styles.linkedin}`} onClick={() => {
+                    openLink({
+                      icon: '/instagram.webp',
+                      appName: 'Instagram',
+                      url: 'https://www.instagram.com/faizzz706',
+                    })
+                  }}>
           <img src="/linkedin.webp" />
           <span>LinkedIn</span>
         </div>
