@@ -18,38 +18,38 @@ export default function CmdApp({ onClose }) {
   const runcommand = (cmd) => {
     let output = ''
 
-    if (cmd === 'help') {
+    if (cmd.trim().toLowerCase() === 'help') {
       output =
         'Info: AUTHOR, STACK, DISCLAIMER\nCommands: DATE, TIME, VER, HELP, EXIT'
-    } else if (cmd === 'author') {
+    } else if (cmd.trim().toLowerCase() === 'author') {
       output = 'Designed and developed by Faiz Ali'
-    } else if (cmd === 'stack') {
+    } else if (cmd.trim().toLowerCase() === 'stack') {
       output =
         'HTML\nCSS\nNext.js\n\nKey Dependencies:\nxp.css\ngithub.com/1j01/jspaint'
-    } else if (cmd === 'disclaimer') {
+    } else if (cmd.trim().toLowerCase() === 'disclaimer') {
       output =
         'This site is a personal portfolio project. All logos, artwork, and assets referenced remain the property of their respective owners. They are included here as inspiration, homage, or parody, not as original creations or with any claim of ownership. This project is independent and has no affiliation with or endorsement from the original creators.'
-    } else if (cmd === 'date') {
+    } else if (cmd.trim().toLowerCase() === 'date') {
       output = new Date().toLocaleDateString()
-    } else if (cmd === 'time') {
+    } else if (cmd.trim().toLowerCase() === 'time') {
       output = new Date().toLocaleTimeString()
-    } else if (cmd === 'ver') {
+    } else if (cmd.trim().toLowerCase() === 'ver') {
       output = 'FaizXP v1.0 (March 2026)'
-    } else if (cmd === 'exit') {
+    } else if (cmd.trim().toLowerCase() === 'exit') {
       onClose()
       return;
-    } else if (cmd === 'clear') {
+    } else if (cmd.trim().toLowerCase() === 'clear') {
       setHistory([])
       return
     } else {
-      output = 'Command Error'
+      output = `'${cmd}' is not recognized as an internal or external command.`
     }
     setHistory((prev) => [...prev, { cmd, output }])
   }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      runcommand(input.trim().toLowerCase())
+      runcommand(input)
       setInput('')
       inputRef.current.focus()
     }

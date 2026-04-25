@@ -1,5 +1,4 @@
 'use client'
-import { title } from 'process'
 import styles from './StartMenu.module.css'
 import { useState, useRef } from 'react'
 export default function StartMenu({
