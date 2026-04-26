@@ -1,6 +1,6 @@
 import styles from "./Openlink.module.css"
 
-export default function Openlink({icon, appName, url, linkCancel, linkVisit}){
+export default function Openlink({icon, appName, linkCancel, linkVisit}){
 
 
     return(
@@ -8,7 +8,7 @@ export default function Openlink({icon, appName, url, linkCancel, linkVisit}){
             <div className={styles.nevbar}>
                 <div style={{display: 'flex', alignItems: 'center'}}><img src={icon} style={{width: '16px', height:'16px'}}></img>
                 <span>Open Link</span></div>
-                <img onClick={linkCancel}  src="/exit.png"></img>
+                <img onClick={linkCancel}  src="/exit.png" loading="lazy"></img>
             </div>
             <div className={styles.main_content}>
                 <div className={styles.popup_content}>

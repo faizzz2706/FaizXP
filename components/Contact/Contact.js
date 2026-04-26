@@ -142,9 +142,9 @@ export default function Contact({onClose, onMinimize, onMaximize, openLink}) {
 
         <div className={`${styles.toolbarItem} ${styles.linkedin}`} onClick={() => {
                     openLink({
-                      icon: '/instagram.webp',
-                      appName: 'Instagram',
-                      url: 'https://www.instagram.com/faizzz706',
+                      icon: '/linkedin.webp',
+                      appName: 'LinkedIn',
+                      url: 'https://www.linkedin.com/in/faiz-ali-134610250',
                     })
                   }}>
           <img src="/linkedin.webp" />
