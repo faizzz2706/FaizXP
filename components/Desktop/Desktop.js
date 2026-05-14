@@ -11,8 +11,7 @@ import Windows from '../Windows/Windows'
 import PaintApp from '../PaintApp/PaintApp'
 import Contact from '../Contact/Contact'
 import CmdApp from '../CmdApp/CmdApp'
-import { type } from 'os'
-import { title } from 'process'
+import About from "../About/About";
 
 export default function Desktop() {
   /*----------------------------------STATES--------------------------------------*/
@@ -47,6 +46,10 @@ export default function Desktop() {
 
     if (data.type === 'contact-me') {
       size = { width: 512, height: 360 }
+    }
+
+    if (data.type === 'about') {
+      size = { width: 790, height: 648 }
     }
 
     const newWindow = {
@@ -196,7 +199,14 @@ export default function Desktop() {
         className={`${styles.desktop_content} ${isDimmed ? styles.grayscale : ''}`}
       >
         <div className={styles.icon_wrapper}>
-          <div className={styles.icon_div}>
+          <div className={styles.icon_div}
+           onDoubleClick={() =>
+              openWindow({
+                type: 'about',
+                title: 'About Me',
+                icon: '/about.webp',
+              })
+            }>
             <img src="/about.webp" alt="About"></img>
             <p>About Me</p>
           </div>
@@ -254,7 +264,15 @@ export default function Desktop() {
                 onClose={() => closeWindow(win.id)}
                 onMinimize={() => toggleMinimize(win.id)}
                 onMaximize={() => toggleMaximize(win.id)}
-                openLink = {handleLinkData}
+                openLink={handleLinkData}
+              />
+            )}
+            {win.type === 'about' && (
+              <About
+                onClose={() => closeWindow(win.id)}
+                onMinimize={() => toggleMinimize(win.id)}
+                onMaximize={() => toggleMaximize(win.id)}
+                openLink={handleLinkData}
               />
             )}
           </Windows>

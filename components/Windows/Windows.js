@@ -141,7 +141,7 @@ export default function Windows({
       <div className={styles.header} onMouseDown={startDrag}>
         <div className={styles.title_box}>
           <img src={icon} />
-          <span>{title}</span>
+          <span style={{color: 'white'}}>{title}</span>
         </div>
 
         <div className={styles.control_buttons}>
