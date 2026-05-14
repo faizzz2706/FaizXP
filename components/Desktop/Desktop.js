@@ -12,6 +12,10 @@ import PaintApp from '../PaintApp/PaintApp'
 import Contact from '../Contact/Contact'
 import CmdApp from '../CmdApp/CmdApp'
 import About from "../About/About";
+import {
+  clampWindowToViewport,
+  TASKBAR_HEIGHT_PX,
+} from "@/utils/windowBounds";
 
 export default function Desktop() {
   /*----------------------------------STATES--------------------------------------*/
@@ -52,15 +56,26 @@ export default function Desktop() {
       size = { width: 790, height: 648 }
     }
 
+    const width = size.width || 400
+    const height = size.height || 300
+    const desiredTop = 100 + offset
+    const desiredLeft = 100 + offset
+    const { top, left } = clampWindowToViewport(
+      desiredTop,
+      desiredLeft,
+      width,
+      height
+    )
+
     const newWindow = {
       id: Date.now(),
       type: data.type,
       title: data.title,
       icon: data.icon,
-      width: size.width || 400,
-      height: size.height || 300,
-      top: 100 + offset,
-      left: 100 + offset,
+      width,
+      height,
+      top,
+      left,
       isMinimized: false,
       isMaximized: false,
       zIndex: windows.length + 1,
@@ -99,7 +114,7 @@ export default function Desktop() {
               left: win.left,
             },
             width: window.innerWidth,
-            height: window.innerHeight - 40,
+            height: window.innerHeight - TASKBAR_HEIGHT_PX,
             top: 0,
             left: 0,
             isMaximized: true,

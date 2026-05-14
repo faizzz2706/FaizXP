@@ -1,6 +1,7 @@
 "use client";
 import styles from "./Windows.module.css";
 import { useRef } from "react";
+import { clampWindowToViewport } from "@/utils/windowBounds";
 
 export default function Windows({
   title,
@@ -55,10 +56,9 @@ export default function Windows({
     const dx = e.clientX - startX.current;
     const dy = e.clientY - startY.current;
 
-    onUpdate({
-      top: startTop.current + dy,
-      left: startLeft.current + dx
-    });
+    const nextTop = startTop.current + dy;
+    const nextLeft = startLeft.current + dx;
+    onUpdate(clampWindowToViewport(nextTop, nextLeft, width, height));
   };
 
   const stopDrag = () => {
@@ -116,11 +116,17 @@ export default function Windows({
       newTop = startTop.current + dy;
     }
 
+    const { top: clampedTop, left: clampedLeft } = clampWindowToViewport(
+      newTop,
+      newLeft,
+      newWidth,
+      newHeight
+    );
     onUpdate({
       width: newWidth,
       height: newHeight,
-      top: newTop,
-      left: newLeft
+      top: clampedTop,
+      left: clampedLeft,
     });
   };
 
