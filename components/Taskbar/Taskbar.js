@@ -4,7 +4,9 @@ import TrayIcon from '../TrayIcon/TrayIcon.js'
 import { useEffect, useState } from 'react'
 
 export default function Taskbar({
+  crt,
   windows,
+  focusedZIndex,
   onToggleMinimize,
   toggleCRT,
   toggleWelcome,
@@ -34,18 +36,28 @@ export default function Taskbar({
           <img src="/start-button.webp" alt="start"></img>
         </button>
         <div className={styles.middle}>
-          {windows.map((win) => (
-            <div
-              key={win.id}
-              onClick={() => onToggleMinimize(win.id)}
-              className={`${styles.task_button} ${
-                win.isMinimized ? styles.minimized : styles.active
-              }`}
-            >
-              <img src={win.icon} style={{ width: '14px', marginRight: '5px' }} />
-              <span className={styles.tab}>{win.title}</span>
-            </div>
-          ))}
+          {windows.map((win) => {
+            const isFocused =
+              !win.isMinimized && win.zIndex === focusedZIndex
+
+            return (
+              <div
+                key={win.id}
+                onClick={() => onToggleMinimize(win.id)}
+                className={`${styles.task_button} ${
+                  win.isMinimized || !isFocused
+                    ? styles.minimized
+                    : styles.active
+                }`}
+              >
+                <img
+                  src={win.icon}
+                  style={{ width: '14px', marginRight: '5px' }}
+                />
+                <span className={styles.tab}>{win.title}</span>
+              </div>
+            )
+          })}
         </div>
       </div>
       <div className={styles.right}>
@@ -56,7 +68,7 @@ export default function Taskbar({
             onClick={toggleWelcome}
           />
           <TrayIcon
-            icon="/crt-off.webp"
+            icon={crt ? '/crt.webp' : '/crt-off.webp'}
             text="Toggle CRT"
             onClick={toggleCRT}
           />

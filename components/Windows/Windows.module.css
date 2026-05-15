@@ -1,9 +1,16 @@
 .window {
   position: absolute;
-  background: #004ff9;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   padding: 0px 2px 3px 2px;
+}
+
+.window.focused {
+  background: #004ff9;
+}
+
+.window.unfocused {
+  background: linear-gradient(180deg, #3ba0e7 0, #3295eb 50%, #3389d4);
 }
 
 
@@ -26,7 +33,6 @@
 
 .header {
   height: 30px;
-  background: #0064ff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,6 +40,14 @@
   padding: 0 6px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+}
+
+.focused .header {
+  background: #0064ff;
+}
+
+.unfocused .header {
+  background: linear-gradient(180deg, #3ba0e7 0, #3295eb 50%, #3389d4);
 }
 
 .title_box {
@@ -62,9 +76,16 @@
   background-repeat: no-repeat;
   background-position: 50%;
   box-shadow: none;
-  background-color: #0050ee;
   transition: background 0.1s;
   border: none;
+}
+
+.focused .control_buttons button {
+  background-color: #0050ee;
+}
+
+.unfocused .control_buttons button {
+  background-color: #3389d4;
 }
 
 .content {

@@ -12,6 +12,7 @@ import PaintApp from '../PaintApp/PaintApp'
 import Contact from '../Contact/Contact'
 import CmdApp from '../CmdApp/CmdApp'
 import About from "../About/About";
+import Resume from "../Resume/Resume"
 import {
   clampWindowToViewport,
   TASKBAR_HEIGHT_PX,
@@ -56,33 +57,30 @@ export default function Desktop() {
       size = { width: 790, height: 648 }
     }
 
-    const width = size.width || 400
-    const height = size.height || 300
-    const desiredTop = 100 + offset
-    const desiredLeft = 100 + offset
-    const { top, left } = clampWindowToViewport(
-      desiredTop,
-      desiredLeft,
-      width,
-      height
-    )
-
-    const newWindow = {
-      id: Date.now(),
-      type: data.type,
-      title: data.title,
-      icon: data.icon,
-      width,
-      height,
-      top,
-      left,
-      isMinimized: false,
-      isMaximized: false,
-      zIndex: windows.length + 1,
-      disableMaximize: data.type === 'cmd',
+    if (data.type === 'resume') {
+      size = { width: 706, height: 698.4 }
     }
 
-    setWindows((prev) => [...prev, newWindow])
+    setWindows((prev) => {
+      const maxZ = Math.max(...prev.map((w) => w.zIndex), 0)
+
+      const newWindow = {
+        id: Date.now(),
+        type: data.type,
+        title: data.title,
+        icon: data.icon,
+        width: size.width || 400,
+        height: size.height || 300,
+        top: 100 + offset,
+        left: 100 + offset,
+        isMinimized: false,
+        isMaximized: false,
+        zIndex: maxZ + 1,
+        disableMaximize: data.type === 'cmd',
+      }
+
+      return [...prev, newWindow]
+    })
   }
   const updateWindow = (id, updates) => {
     setWindows((prev) =>
@@ -114,7 +112,7 @@ export default function Desktop() {
               left: win.left,
             },
             width: window.innerWidth,
-            height: window.innerHeight - TASKBAR_HEIGHT_PX,
+            height: window.innerHeight - 40,
             top: 0,
             left: 0,
             isMaximized: true,
@@ -136,6 +134,30 @@ export default function Desktop() {
         win.id === id ? { ...win, isMinimized: !win.isMinimized } : win
       )
     )
+  }
+
+  const handleTaskbarClick = (id) => {
+    setWindows((prev) => {
+      const win = prev.find((w) => w.id === id)
+      if (!win) return prev
+
+      const focusedZ = prev.reduce(
+        (max, w) => (w.isMinimized ? max : Math.max(max, w.zIndex)),
+        0
+      )
+      const isFocused = !win.isMinimized && win.zIndex === focusedZ
+
+      if (win.isMinimized || !isFocused) {
+        const maxZ = Math.max(...prev.map((w) => w.zIndex), 0)
+        return prev.map((w) =>
+          w.id === id ? { ...w, isMinimized: false, zIndex: maxZ + 1 } : w
+        )
+      }
+
+      return prev.map((w) =>
+        w.id === id ? { ...w, isMinimized: true } : w
+      )
+    })
   }
 
   const closeWindow = (id) => {
@@ -197,6 +219,12 @@ export default function Desktop() {
   const handleMouseUp = (e) => {
     setIsSelecting(false)
   }
+
+  const focusedZIndex = windows.reduce(
+    (max, win) => (win.isMinimized ? max : Math.max(max, win.zIndex)),
+    0
+  )
+
   /*----------------------------RENDER----------------------------------*/
   return (
     /*----------------------------DESKTOP MAIN RENDER----------------------------------*/
@@ -225,7 +253,13 @@ export default function Desktop() {
             <img src="/about.webp" alt="About"></img>
             <p>About Me</p>
           </div>
-          <div className={styles.icon_div}>
+          <div className={styles.icon_div}   onDoubleClick={() =>
+              openWindow({
+                type: 'resume',
+                title: 'Resume',
+                icon: '/resume.webp',
+              })
+            }>
             <img src="/resume.webp" alt="My Resume"></img>
             <p>My Resume</p>
           </div>
@@ -262,6 +296,7 @@ export default function Desktop() {
             top={win.top}
             left={win.left}
             zIndex={win.zIndex}
+            isFocused={!win.isMinimized && win.zIndex === focusedZIndex}
             isMinimized={win.isMinimized}
             onClose={() => closeWindow(win.id)}
             onFocus={() => focusWindow(win.id)}
@@ -282,18 +317,33 @@ export default function Desktop() {
                 openLink={handleLinkData}
               />
             )}
+
+            
             {win.type === 'about' && (
               <About
                 onClose={() => closeWindow(win.id)}
                 onMinimize={() => toggleMinimize(win.id)}
                 onMaximize={() => toggleMaximize(win.id)}
                 openLink={handleLinkData}
+                openApp={openWindow}
               />
             )}
+
+
+            {win.type === 'resume' && (
+              <Resume
+                onClose={() => closeWindow(win.id)}
+                onMinimize={() => toggleMinimize(win.id)}
+                onMaximize={() => toggleMaximize(win.id)}
+                openLink={handleLinkData}
+                openApp={openWindow}
+              />
+            )}
+
           </Windows>
         ))}
 
-        {/*---------------------------------SELECT WINDOW--------------------------------*/}
+        {/*---------------------------------SELECT BOX--------------------------------*/}
 
         {isSelecting && (
           <div
@@ -326,29 +376,31 @@ export default function Desktop() {
           </div>
         )}
 
-        {/*----------------------------START MENU----------------------------------*/}
-
-        {startMenu && (
-          <StartMenu
-            handleLogoff={handleLogoff}
-            handleShutdown={handleShutdown}
-            openLink={handleLinkData}
-            openApp={openWindow}
-            closeStart={() => setStartMenu(false)}
-          />
-        )}
-
         {/*---------------------------------TASKBAR-----------------------------------*/}
 
         <Taskbar
           windows={windows}
+          focusedZIndex={focusedZIndex}
           onRestore={restoreWindow}
-          onToggleMinimize={toggleMinimize}
+          onToggleMinimize={handleTaskbarClick}
+          crt={crt}
           toggleCRT={() => useCrt((prev) => !prev)}
           toggleWelcome={() => showWelcome((prev) => !prev)}
           toggleStartMenu={() => setStartMenu((prev) => !prev)}
         />
       </div>
+
+      {/*----------------------------START MENU----------------------------------*/}
+
+      {startMenu && (
+        <StartMenu
+          handleLogoff={handleLogoff}
+          handleShutdown={handleShutdown}
+          openLink={handleLinkData}
+          openApp={openWindow}
+          closeStart={() => setStartMenu(false)}
+        />
+      )}
 
       {/*----------------------------LOGOFF POPUP----------------------------------*/}
 

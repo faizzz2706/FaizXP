@@ -301,7 +301,14 @@ export default function StartMenu({
             <span>Image Viewer</span>
           </div>
 
-          <div className={styles.middle_right_li}>
+          <div className={styles.middle_right_li} onClick={() => {
+                    closeStart()
+                    openApp({
+                      type: 'resume',
+                      title: 'Resume',
+                      icon: '/resume.webp',
+                    })
+                  }}>
             <img src="/resume.webp"></img>
             <span>My Resume</span>
           </div>

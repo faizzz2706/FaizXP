@@ -11,6 +11,7 @@ export default function Windows({
   top,
   left,
   zIndex,
+  isFocused = true,
   isMinimized,
   onClose,
   onFocus,
@@ -59,6 +60,9 @@ const handleMinimize = () => {
 
   // -------- DRAG --------
   const startDrag = (e) => {
+    e.stopPropagation();
+    onFocus();
+
     dragging.current = true;
 
     startX.current = e.clientX;
@@ -161,6 +165,7 @@ const handleMinimize = () => {
     <div
       className={`
   ${styles.window}
+  ${isFocused ? styles.focused : styles.unfocused}
   ${isClosing ? styles.windowClosing : ""}
   ${isMinimizing ? styles.windowMinimizing : ""}
 `}
