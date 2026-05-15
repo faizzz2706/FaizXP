@@ -33,20 +33,20 @@ export default function Taskbar({
         <button className={styles.start_button} onClick={toggleStartMenu}>
           <img src="/start-button.webp" alt="start"></img>
         </button>
-      </div>
-      <div className={styles.middle}>
-        {windows.map((win) => (
-          <div
-            key={win.id}
-            onClick={() => onToggleMinimize(win.id)}
-            className={`${styles.task_button} ${
-              win.isMinimized ? styles.minimized : styles.active
-            }`}
-          >
-            <img src={win.icon} style={{ width: '14px', marginRight: '5px' }} />
-            {win.title}
-          </div>
-        ))}
+        <div className={styles.middle}>
+          {windows.map((win) => (
+            <div
+              key={win.id}
+              onClick={() => onToggleMinimize(win.id)}
+              className={`${styles.task_button} ${
+                win.isMinimized ? styles.minimized : styles.active
+              }`}
+            >
+              <img src={win.icon} style={{ width: '14px', marginRight: '5px' }} />
+              {win.title}
+            </div>
+          ))}
+        </div>
       </div>
       <div className={styles.right}>
         <div className={styles.tray_content}>
