@@ -106,7 +106,8 @@
   display: flex;
   align-items: center;
   background: linear-gradient(to top, #3a6ff2, #245edb);
-  border: 1px solid rgba(0,0,0,0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   color: white;
   font-size: 11px;
   cursor: pointer;
@@ -114,14 +115,58 @@
 }
 
 .task_button.active {
-  background: linear-gradient(to top, #245edb, #1d4ed8);
+  background: linear-gradient(0deg, #1a5a99 0, #2176c7);
+  border: 1px solid #174a7c;
+  box-shadow:
+    inset 1px 1px 1px rgba(0, 0, 0, 0.4),
+    inset -1px -1px 0 hsla(0, 0%, 100%, 0.05);
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 .task_button.minimized {
-  opacity: 0.6;
+  align-items: center;
+  background: linear-gradient(180deg, #3ba0e7 0, #3295eb 50%, #3389d4);
+  border: 1px solid #0e63ad;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px hsla(0, 0%, 100%, 0.2);
+  color: #fff;
+  display: flex;
+  flex-shrink: 1;
+  font-size: 11px;
+  height: var(--taskbar-item-height);
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-overflow: ellipsis;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  transition:
+    width 0.15s,
+    background 0.18s,
+    box-shadow 0.18s,
+    border-color 0.18s;
+  white-space: nowrap;
 }
 
 .task_button img {
   width: 14px;
   margin-right: 5px;
+}
+
+.tab {
+  color: #fff;
+  flex-grow: 1;
+  font-weight: 400;
+  overflow: hidden;
+  padding: 3px 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0;
+  margin-right: 14px;
+  font-family: Trebuchet MS;
+  font-size: 12px;
+  text-shadow: 1px 1px #0f1089;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }

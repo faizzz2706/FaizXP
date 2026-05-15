@@ -1,6 +1,6 @@
 "use client";
 import styles from "./Windows.module.css";
-import { useRef } from "react";
+import { useState,useRef } from "react";
 import { clampWindowToViewport } from "@/utils/windowBounds";
 
 export default function Windows({
@@ -21,6 +21,9 @@ export default function Windows({
   children
 }) {
 
+  const [isClosing, setIsClosing] = useState(false)
+const [isMinimizing, setIsMinimizing] = useState(false)
+
   const dragging = useRef(false);
   const resizing = useRef(false);
   const direction = useRef(null);
@@ -35,6 +38,24 @@ export default function Windows({
   const startHeight = useRef(0);
 
   if (isMinimized) return null;
+  
+  //---------------WRAPPER FUNCTION----------//
+  const handleClose = () => {
+  setIsClosing(true)
+
+  setTimeout(() => {
+    onClose()
+  }, 160)
+}
+
+const handleMinimize = () => {
+  setIsMinimizing(true)
+
+  setTimeout(() => {
+    onMinimize()
+    setIsMinimizing(false)
+  }, 180)
+}
 
   // -------- DRAG --------
   const startDrag = (e) => {
@@ -138,7 +159,11 @@ export default function Windows({
 
   return (
     <div
-      className={styles.window}
+      className={`
+  ${styles.window}
+  ${isClosing ? styles.windowClosing : ""}
+  ${isMinimizing ? styles.windowMinimizing : ""}
+`}
       style={{ width, height, top, left, zIndex }}
       onMouseDown={onFocus}
     >
@@ -147,13 +172,13 @@ export default function Windows({
       <div className={styles.header} onMouseDown={startDrag}>
         <div className={styles.title_box}>
           <img src={icon} />
-          <span style={{color: 'white'}}>{title}</span>
+          <span style={{color: 'white'}} className={styles.title}>{title}</span>
         </div>
 
         <div className={styles.control_buttons}>
-          <button onClick={onMinimize} className={styles.minimize}></button>
+          <button onClick={handleMinimize} className={styles.minimize}></button>
           <button onClick={onMaximize} disabled = {disableMaximize} className={styles.maximize}></button>
-          <button onClick={onClose} className={styles.close}></button>
+          <button onClick={handleClose} className={styles.close}></button>
         </div>
       </div>
 

@@ -43,7 +43,7 @@ export default function Taskbar({
               }`}
             >
               <img src={win.icon} style={{ width: '14px', marginRight: '5px' }} />
-              {win.title}
+              <span className={styles.tab}>{win.title}</span>
             </div>
           ))}
         </div>
