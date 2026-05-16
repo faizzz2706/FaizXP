@@ -33,6 +33,8 @@ export default function CmdApp({ onClose }) {
       output = new Date().toLocaleDateString()
     } else if (cmd.trim().toLowerCase() === 'time') {
       output = new Date().toLocaleTimeString()
+    }else if (cmd.trim().toLowerCase() === 'mahvish') {
+      output = 'I Love You Mahvish Ji'
     } else if (cmd.trim().toLowerCase() === 'ver') {
       output = 'FaizXP v1.0 (March 2026)'
     } else if (cmd.trim().toLowerCase() === 'exit') {

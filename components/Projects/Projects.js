@@ -139,8 +139,6 @@ export default function Projects({ onClose, onMinimize, onMaximize }) {
             <FontAwesomeIcon icon={faGithub} />
           </div>
         </div>
-
-        
       </div>
     </div>
   )
