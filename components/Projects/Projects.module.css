@@ -1,0 +1,260 @@
+.main {
+  width: 100%;
+  height: 100%;
+  background-color: #ededed;
+  position: relative;
+}
+
+.header {
+  height: 22px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid #d0cece9a;
+  justify-content: space-between;
+}
+
+/* ===== MENUBAR ===== */
+.menubar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  font-family: Tahoma, sans-serif;
+}
+
+/* Menu items */
+.menuItem {
+  position: relative;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+/* Disabled items */
+.edit,
+.tools,
+.help,
+.disabled {
+  color: #bcbcbc !important;
+}
+
+.disabled {
+  filter: opacity(0.5);
+}
+
+/* Active (clicked) menu ONLY */
+.activeMenu {
+  background-color: #0770c7;
+  color: white;
+}
+
+/* ===== DROPDOWN ===== */
+.menuDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 160px;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.menuDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuDropdown li {
+  padding: 5px 12px;
+  font-size: 11px;
+  color: black;
+  background-color: white;
+}
+.file:hover,
+.view:hover,
+.exit:hover,
+.maximize:hover,
+.minimize:hover {
+  background-color: #0770c7;
+  color: white;
+}
+
+.toolbar {
+  height: 48px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  padding: 0 8px 0 4px;
+  border-bottom: 1.5px solid #d0cece9a;
+  align-items: center;
+}
+
+.toolbar_item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: auto;
+  box-sizing: border-box;
+  padding: 2px 8px 2px 8px;
+}
+
+.toolbar_item img {
+  width: 25px;
+  height: 25px;
+}
+
+.toolbar_item span {
+  margin-left: 5px;
+  color: black;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 11px;
+}
+.verticle {
+  width: 1px;
+  background-color: #d0cece9a;
+  height: 30px;
+}
+
+.address_row {
+  height: 34px;
+  width: 100%;
+  padding: 0px 2px 0px 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.address_row div {
+  margin: 0px;
+}
+
+.go {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  font-size: 11px;
+  font-family: Tahoma, sans-serif;
+  gap: 4px;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.addressItem {
+  display: flex;
+  padding: 0 8px;
+  align-items: center;
+  font-size: 11px;
+  font-family: Tahoma, sans-serif;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.addressBar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.fillbar {
+  width: 100%;
+  height: 70%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+  border: 1px solid #d0cece9a;
+}
+
+.fillbar img {
+  margin-left: 4px;
+  width: 14px;
+  height: 14px;
+}
+
+.fillbar span {
+  font-size: 11px;
+  font-family: Tahoma, sans-serif;
+}
+
+.hero {
+  width: 100%;
+  height: calc(100% - 124px);
+  background-color: #ffffff;
+}
+
+.hero_header {
+    width: 100%;
+    box-sizing: border-box;
+    height: 68px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(218, 216, 216);
+}
+.logo,.search,.links{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    width: 158.31px;
+}
+.logo img{
+    width: 100%;
+    height: auto;
+    
+}
+.search{
+    width: calc(227.2px + 48.8px);
+}
+.search input{
+    width: 232.2px;
+    height: 32px;
+    box-sizing: border-box;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    padding-left: 20px;
+    font-size: medium;
+    outline: none;
+    border: 1px solid rgb(194, 191, 196);
+    border-right: none;
+}
+
+.search input:focus{
+    border: 1px solid rgb(95, 62, 238);
+    border-right: none;
+}
+
+.search div{
+    color: black;
+    height: 32px;
+    width: 100%;
+    background-color: #E4E4E4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: 1px solid rgb(194, 191, 196);
+    box-sizing: border-box;
+    border-left: none;
+}
+
+.links{
+    width: 98px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+}

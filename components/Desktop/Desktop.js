@@ -11,12 +11,10 @@ import Windows from '../Windows/Windows'
 import PaintApp from '../PaintApp/PaintApp'
 import Contact from '../Contact/Contact'
 import CmdApp from '../CmdApp/CmdApp'
-import About from "../About/About";
-import Resume from "../Resume/Resume"
-import {
-  clampWindowToViewport,
-  TASKBAR_HEIGHT_PX,
-} from "@/utils/windowBounds";
+import About from '../About/About'
+import Resume from '../Resume/Resume'
+import Projects from '../Projects/Projects'
+import { clampWindowToViewport, TASKBAR_HEIGHT_PX } from '@/utils/windowBounds'
 
 export default function Desktop() {
   /*----------------------------------STATES--------------------------------------*/
@@ -60,7 +58,9 @@ export default function Desktop() {
     if (data.type === 'resume') {
       size = { width: 706, height: 698.4 }
     }
-
+    if (data.type === 'projects') {
+      size = { width: 860, height: 766 }
+    }
     setWindows((prev) => {
       const maxZ = Math.max(...prev.map((w) => w.zIndex), 0)
 
@@ -154,9 +154,7 @@ export default function Desktop() {
         )
       }
 
-      return prev.map((w) =>
-        w.id === id ? { ...w, isMinimized: true } : w
-      )
+      return prev.map((w) => (w.id === id ? { ...w, isMinimized: true } : w))
     })
   }
 
@@ -242,28 +240,38 @@ export default function Desktop() {
         className={`${styles.desktop_content} ${isDimmed ? styles.grayscale : ''}`}
       >
         <div className={styles.icon_wrapper}>
-          <div className={styles.icon_div}
-           onDoubleClick={() =>
+          <div
+            className={styles.icon_div}
+            onDoubleClick={() =>
               openWindow({
                 type: 'about',
                 title: 'About Me',
                 icon: '/about.webp',
               })
-            }>
+            }
+          >
             <img src="/about.webp" alt="About"></img>
             <p>About Me</p>
           </div>
-          <div className={styles.icon_div}   onDoubleClick={() =>
+          <div
+            className={styles.icon_div}
+            onDoubleClick={() =>
               openWindow({
                 type: 'resume',
                 title: 'Resume',
                 icon: '/resume.webp',
               })
-            }>
+            }
+          >
             <img src="/resume.webp" alt="My Resume"></img>
             <p>My Resume</p>
           </div>
-          <div className={styles.icon_div}>
+          <div className={styles.icon_div}  onDoubleClick={() =>
+              openWindow({
+                type: 'projects',
+                title: 'My Projects',
+                icon: '/projects.webp',
+              })}>
             <img src="/projects.webp" alt="My projects"></img>
             <p>My Projects</p>
           </div>
@@ -318,7 +326,6 @@ export default function Desktop() {
               />
             )}
 
-            
             {win.type === 'about' && (
               <About
                 onClose={() => closeWindow(win.id)}
@@ -328,7 +335,6 @@ export default function Desktop() {
                 openApp={openWindow}
               />
             )}
-
 
             {win.type === 'resume' && (
               <Resume
@@ -340,6 +346,13 @@ export default function Desktop() {
               />
             )}
 
+            {win.type === 'projects' && (
+              <Projects
+                onClose={() => closeWindow(win.id)}
+                onMinimize={() => toggleMinimize(win.id)}
+                onMaximize={() => toggleMaximize(win.id)}
+              />
+            )}
           </Windows>
         ))}
 
