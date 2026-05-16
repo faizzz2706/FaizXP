@@ -200,7 +200,7 @@ Paint functionality references **[JS Paint](https://github.com/1j01/jspaint)** (
 ## License
 
 <!-- Add your license (e.g. MIT) or "All rights reserved" -->
-**[Specify your license here]**
+Not yet
 
 ---
 
